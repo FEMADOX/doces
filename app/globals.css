@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* ====== PURO DOCE design tokens ====== */
+@theme {
+  --color-cream: #F7ECDD;
+  --color-cream-deep: #F4E6D2;
+  --color-sand: #EFE0C8;
+  --color-sand-2: #E9D6B8;
+  --color-caramel: #B5651D;
+  --color-caramel-dark: #7A4517;
+  --color-cacau: #2A1810;
+  --color-cacau-soft: #3A2014;
+  --color-coffee: #6E5238;
+  --color-honey: #EEBB55;
+  --color-gold: #FFC23C;
+  --color-mocha: #9C6B3E;
+  --color-toast: #C9A05A;
+
+  --font-display: var(--font-bagel), "Baloo 2", sans-serif;
+  --font-body: var(--font-baloo), "Baloo 2", sans-serif;
+
+  --shadow-pop: 0 9px 0 #7A4517;
+  --shadow-soft: 0 30px 60px -30px rgba(90, 52, 20, 0.5);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-cream);
+  color: var(--color-cacau);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+::selection { background: var(--color-caramel); color: #fff; }
+
+/* outlined wordmark helper */
+.stroke-cream {
+  -webkit-text-stroke: 6px #FFF6EA;
+  paint-order: stroke;
+}
+.stroke-cream-thin {
+  -webkit-text-stroke: 2px #fff;
+  paint-order: stroke;
+}
+.stroke-cacau {
+  -webkit-text-stroke: 3px #8A4B12;
+  paint-order: stroke;
+}
+
+/* ====== keyframes ====== */
+@keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+@keyframes floatySm { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes wobble { 0%,100%{transform:rotate(-7deg)} 50%{transform:rotate(7deg)} }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes boing { 0%,100%{transform:rotate(-10deg) translateY(0)} 50%{transform:rotate(10deg) translateY(-4px)} }
+@keyframes spinSlow { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+@keyframes drift { 0%,100%{transform:translate(0,0) rotate(var(--r,0deg))} 50%{transform:translate(var(--dx,8px),var(--dy,-14px)) rotate(calc(var(--r,0deg) + 8deg))} }
+
+.animate-floaty { animation: floaty 6.5s ease-in-out infinite; }
+.animate-floatySm { animation: floatySm 4s ease-in-out infinite; }
+.animate-wobble { animation: wobble 3.2s ease-in-out infinite; }
+.animate-boing { animation: boing 1.9s ease-in-out infinite; }
+.animate-spinSlow { animation: spinSlow 22s linear infinite; }
+.animate-drift { animation: drift 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+}
