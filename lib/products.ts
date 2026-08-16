@@ -1,12 +1,22 @@
+import type { StaticImageData } from "next/image";
+import brigadeiroImage from "@/public/assets/pega/brigadeiro.webp";
+import brownieImage from "@/public/assets/pega/brownie.webp";
+import boloNoPoteImage from "@/public/assets/pega/bolo-no-pote.webp";
+import cheesecakeImage from "@/public/assets/pega/cheesecake.webp";
+import cupcakeImage from "@/public/assets/pega/cupcake.webp";
+import boloRecheadoImage from "@/public/assets/pega/bolo-recheado.webp";
+
 export type Product = {
   id: string;
   name: string;
   desc: string;
   badge: string;
   badgeIcon: string;
-  price: number; // in BRL
-  defaultImage?: string;
+  price: number;
+  defaultImage: StaticImageData;
 };
+
+export type CartProduct = Pick<Product, "id" | "name" | "price" | "badgeIcon">;
 
 export const products: Product[] = [
   {
@@ -16,7 +26,7 @@ export const products: Product[] = [
     badge: "Mais vendido",
     badgeIcon: "🥇",
     price: 4.5,
-    defaultImage: "/assets/pega/brigadeiro.png",
+    defaultImage: brigadeiroImage,
   },
   {
     id: "brownie",
@@ -25,7 +35,7 @@ export const products: Product[] = [
     badge: "Top delivery",
     badgeIcon: "🥈",
     price: 12.0,
-    defaultImage: "/assets/pega/brownie.png",
+    defaultImage: brownieImage,
   },
   {
     id: "bolo-no-pote",
@@ -34,7 +44,7 @@ export const products: Product[] = [
     badge: "Em alta",
     badgeIcon: "🥉",
     price: 18.0,
-    defaultImage: "/assets/pega/bolo-no-pote.png",
+    defaultImage: boloNoPoteImage,
   },
   {
     id: "cheesecake",
@@ -43,7 +53,7 @@ export const products: Product[] = [
     badge: "Premium",
     badgeIcon: "🏅",
     price: 22.0,
-    defaultImage: "/assets/pega/cheesecake.png",
+    defaultImage: cheesecakeImage,
   },
   {
     id: "cupcake",
@@ -52,7 +62,7 @@ export const products: Product[] = [
     badge: "Pra festa",
     badgeIcon: "🧁",
     price: 9.0,
-    defaultImage: "/assets/pega/cupcake.png",
+    defaultImage: cupcakeImage,
   },
   {
     id: "bolo-recheado",
@@ -61,7 +71,7 @@ export const products: Product[] = [
     badge: "Sabores do momento",
     badgeIcon: "🍰",
     price: 89.0,
-    defaultImage: "/assets/pega/bolo-recheado.png",
+    defaultImage: boloRecheadoImage,
   },
 ];
 

@@ -1,10 +1,13 @@
-"use client";
-
-import { motion } from "motion/react";
-import PhotoSlot from "@/components/PhotoSlot";
+import Image, { type StaticImageData } from "next/image";
+import type { CSSProperties } from "react";
+import mascotImage from "@/public/assets/brigadeiro-mascot.webp";
+import brigadeiroImage from "@/public/assets/pega/brigadeiro.webp";
+import brownieImage from "@/public/assets/pega/brownie.webp";
+import cheesecakeImage from "@/public/assets/pega/cheesecake.webp";
 
 type CardConfig = {
-  slotId: string;
+  image: StaticImageData;
+  alt: string;
   baseRotate: number;
   baseY: number;
   zIndex: number;
@@ -13,15 +16,10 @@ type CardConfig = {
   boxClassName: string;
 };
 
-const cardSpring = {
-  type: "spring" as const,
-  stiffness: 260,
-  damping: 18,
-};
-
 const cards: CardConfig[] = [
   {
-    slotId: "galeria-1",
+    image: brigadeiroImage,
+    alt: "Brigadeiro gourmet coberto com granulado",
     baseRotate: -6,
     baseY: 0,
     zIndex: 1,
@@ -30,7 +28,8 @@ const cards: CardConfig[] = [
     boxClassName: "w-[clamp(220px,25vw,340px)] h-[clamp(280px,31vw,420px)]",
   },
   {
-    slotId: "galeria-2",
+    image: brownieImage,
+    alt: "Brownie de chocolate artesanal",
     baseRotate: 2,
     baseY: -14,
     zIndex: 3,
@@ -39,7 +38,8 @@ const cards: CardConfig[] = [
     boxClassName: "w-[clamp(260px,30vw,420px)] h-[clamp(320px,35vw,470px)]",
   },
   {
-    slotId: "galeria-3",
+    image: cheesecakeImage,
+    alt: "Cheesecake cremoso de chocolate",
     baseRotate: 7,
     baseY: 0,
     zIndex: 1,
@@ -56,83 +56,81 @@ export default function Gallery() {
       aria-label="Peça agora"
       className="relative overflow-hidden bg-cream-deep"
       style={{
-        padding:
-          "clamp(56px,8vw,110px) clamp(20px,5vw,72px) clamp(64px,9vw,120px)",
+        padding: "clamp(56px,8vw,110px) clamp(20px,5vw,72px) clamp(64px,9vw,120px)",
       }}
     >
       <div
         className="flex justify-center"
         style={{ marginBottom: "clamp(28px,4vw,54px)" }}
+        data-reveal
       >
-        <motion.a
+        <a
           href="#cardapio"
-          className="inline-block rounded-full bg-caramel px-12 py-4 font-display tracking-wide text-[#FFF6EA]"
-          style={{
-            fontSize: "clamp(20px,2.4vw,30px)",
-            boxShadow: "0 9px 0 #7A4517",
-          }}
-          whileHover={{ y: 4, boxShadow: "0 5px 0 #7A4517" }}
-          whileTap={{ y: 7, boxShadow: "0 2px 0 #7A4517" }}
-          transition={cardSpring}
+          className="press-button inline-block rounded-full bg-caramel px-12 py-4 font-display tracking-wide text-[#FFF6EA]"
+          style={
+            {
+              "--button-shadow": "0 9px 0 #7A4517",
+              fontSize: "clamp(20px,2.4vw,30px)",
+            } as CSSProperties
+          }
         >
           PEÇA AGORA
-        </motion.a>
+        </a>
       </div>
 
       <div
         className="relative mx-auto flex max-w-[1260px] flex-wrap items-center justify-center"
         style={{ gap: "clamp(10px,1.8vw,30px)" }}
       >
-        {/* Mascot taking a selfie — sticker pops in over the photo cards. */}
-        <motion.img
-          src="/assets/brigadeiro-mascot.png"
-          alt=""
-          aria-hidden="true"
-          className="animate-floaty pointer-events-none absolute z-[7]"
-          style={{
-            left: "clamp(-40px,-2vw,-8px)",
-            top: "clamp(-150px,-14vw,-96px)",
-            width: "clamp(130px,15vw,210px)",
-            filter: "drop-shadow(0 14px 22px rgba(90,52,20,.35))",
-          }}
-          initial={{ opacity: 0, scale: 0.4, rotate: -16 }}
-          whileInView={{ opacity: 1, scale: 1, rotate: -4 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ type: "spring", stiffness: 280, damping: 14 }}
-        />
+        <div
+          data-reveal
+          aria-hidden
+          className="pointer-events-none absolute z-[7] hidden md:block"
+          style={
+            {
+              "--reveal-scale": 0.4,
+              left: "clamp(-40px,-2vw,-8px)",
+              top: "clamp(-150px,-14vw,-96px)",
+              width: "clamp(130px,15vw,210px)",
+            } as CSSProperties
+          }
+        >
+          <Image
+            src={mascotImage}
+            alt=""
+            loading="lazy"
+            sizes="(max-width: 767px) 0px, 210px"
+            className="animate-floaty ambient-mobile-off block h-auto w-full"
+            style={{ filter: "drop-shadow(0 14px 22px rgba(90,52,20,.35))" }}
+          />
+        </div>
 
         {cards.map((card, index) => (
-          <motion.div
-            key={card.slotId}
-            className={`relative cursor-pointer ${card.cardClassName}`}
-            style={{ boxShadow: card.shadow, zIndex: card.zIndex }}
-            initial={{ opacity: 0, scale: 0.85, rotate: card.baseRotate, y: card.baseY }}
-            whileInView={{
-              opacity: 1,
-              scale: 1,
-              rotate: card.baseRotate,
-              y: card.baseY,
-            }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ ...cardSpring, delay: index * 0.12 }}
-            whileHover={{
-              rotate: 0,
-              y: -18,
-              scale: 1.05,
-              zIndex: 10,
-              boxShadow: "0 48px 80px -20px rgba(90,52,20,.7)",
-              transition: cardSpring,
-            }}
+          <article
+            key={card.alt}
+            data-reveal
+            className={`gallery-card relative ${card.cardClassName}`}
+            style={
+              {
+                "--card-rotate": `${card.baseRotate}deg`,
+                "--card-y": `${card.baseY}px`,
+                "--reveal-delay": `${index * 120}ms`,
+                boxShadow: card.shadow,
+                zIndex: card.zIndex,
+              } as CSSProperties
+            }
           >
-            <div className={card.boxClassName}>
-              <PhotoSlot
-                slotId={card.slotId}
-                placeholder="Arraste uma foto"
-                radius={10}
-                className="h-full w-full"
+            <div className={`relative overflow-hidden rounded-[10px] bg-[#F1ECE4] ${card.boxClassName}`}>
+              <Image
+                src={card.image}
+                alt={card.alt}
+                fill
+                loading="lazy"
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 30vw, 390px"
+                className="object-cover"
               />
             </div>
-          </motion.div>
+          </article>
         ))}
       </div>
     </section>

@@ -8,13 +8,15 @@ import Experience from "@/components/Experience";
 import Curitiba from "@/components/Curitiba";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import CartDrawer from "@/components/cart/CartDrawer";
+import DeferredCartDrawer from "@/components/cart/DeferredCartDrawer";
 import CursorTrail from "@/components/CursorTrail";
+import RevealObserver from "@/components/RevealObserver";
 
 export default function Home() {
   return (
     <main className="relative overflow-x-hidden bg-cream text-cacau">
       <Header />
+      <RevealObserver />
       <Hero />
       <Marquee />
       <Intro />
@@ -24,7 +26,7 @@ export default function Home() {
       <Curitiba />
       <CTA />
       <Footer />
-      <CartDrawer />
+      <DeferredCartDrawer />
       <CursorTrail />
     </main>
   );

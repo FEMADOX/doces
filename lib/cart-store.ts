@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Product } from "./products";
+import type { CartProduct } from "./products";
 
 export type CartLine = {
   id: string;
@@ -15,7 +15,7 @@ export type CartLine = {
 type CartState = {
   lines: CartLine[];
   isOpen: boolean;
-  add: (p: Product) => void;
+  add: (p: CartProduct) => void;
   remove: (id: string) => void;
   setQty: (id: string, qty: number) => void;
   clear: () => void;

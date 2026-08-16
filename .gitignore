@@ -3,6 +3,9 @@
 /.pnp
 .pnp.*
 
+# isolated worktrees
+/.worktrees/
+
 # next.js
 /.next/
 /out/
