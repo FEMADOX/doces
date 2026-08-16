@@ -10,11 +10,13 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
 import CursorTrail from "@/components/CursorTrail";
+import RevealObserver from "@/components/RevealObserver";
 
 export default function Home() {
   return (
     <main className="relative overflow-x-hidden bg-cream text-cacau">
       <Header />
+      <RevealObserver />
       <Hero />
       <Marquee />
       <Intro />

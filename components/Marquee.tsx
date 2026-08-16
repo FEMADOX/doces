@@ -1,5 +1,3 @@
-"use client";
-
 const ITEMS = [
   "BRIGADEIRO GOURMET",
   "BROWNIE",
@@ -11,8 +9,8 @@ const ITEMS = [
 function Sequence() {
   return (
     <>
-      {ITEMS.map((item, i) => (
-        <span key={`${item}-${i}`} className="contents">
+      {ITEMS.map((item, index) => (
+        <span key={`${item}-${index}`} className="contents">
           <span className="px-[26px]">{item}</span>
           <span className="px-[26px] text-honey">✦</span>
         </span>
