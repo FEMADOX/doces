@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:performance": "node --test tests/performance-contract.test.mjs",
+    "test:performance:build": "node --test tests/build-performance.test.mjs"
   },
   "dependencies": {
     "motion": "^11.18.0",
