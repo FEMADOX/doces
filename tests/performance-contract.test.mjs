@@ -101,6 +101,14 @@ test("visual sections are server components", () => {
   }
 });
 
+test("optional cursor chunk fails closed", () => {
+  const cursor = readFileSync(join(root, "components/CursorTrail.tsx"), "utf8");
+  assert.match(
+    cursor,
+    /import\("@\/components\/CursorTrailRenderer"\)[\s\S]*?\.catch\(/,
+  );
+});
+
 test("Motion is absent from runtime source and dependencies", () => {
   assert.doesNotMatch(sourceText(), /motion\/react|useSpring|useMotionValue/);
   const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));

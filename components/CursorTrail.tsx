@@ -4,7 +4,10 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
 const CursorTrailRenderer = dynamic(
-  () => import("@/components/CursorTrailRenderer"),
+  () =>
+    import("@/components/CursorTrailRenderer").catch(() => ({
+      default: () => null,
+    })),
   { ssr: false },
 );
 
