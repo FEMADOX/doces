@@ -125,6 +125,82 @@ body {
   .press-button:hover { transform: translateY(2px); }
 }
 
+/* ====== menu + cart client islands ====== */
+.menu-overlay {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(0, -14px, 0);
+  transition:
+    opacity 280ms ease-out,
+    transform 280ms ease-out,
+    visibility 0s linear 280ms;
+}
+.menu-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition-delay: 0s;
+}
+.menu-overlay nav a,
+.menu-kicker {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition: opacity 320ms ease-out, transform 320ms ease-out;
+}
+.menu-overlay.is-open nav a {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--menu-index) * 60ms + 60ms);
+}
+.menu-overlay.is-open .menu-kicker {
+  opacity: 1;
+  transform: none;
+  transition-delay: 360ms;
+}
+
+.cart-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear 360ms;
+}
+.cart-layer.is-open {
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+.cart-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: rgba(42,24,16,.45);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.cart-layer.is-open .cart-backdrop { opacity: 1; }
+.cart-panel {
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  width: min(100%, 440px);
+  transform: translate3d(100%, 0, 0);
+  transition: transform 360ms cubic-bezier(.22,1,.36,1);
+}
+.cart-layer.is-open .cart-panel { transform: none; }
+.cart-action-button:active:not(:disabled) { transform: translateY(2px); }
+@keyframes cartConfirmation {
+  from { opacity: 0; scale: .9; }
+  to { opacity: 1; scale: 1; }
+}
+.cart-confirmation { animation: cartConfirmation 300ms cubic-bezier(.22,1,.36,1) both; }
+
 /* ====== progressive scroll reveals ====== */
 [data-reveal] {
   opacity: 1;
