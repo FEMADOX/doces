@@ -42,7 +42,13 @@
 
 ### Performance
 - Next.js App Router, Turbopack. Google fonts via `next/font` with `swap`.
-- `overflow-x: hidden` to prevent horizontal scroll from oversized art.
+- Static visual sections remain Server Components; interactivity uses small
+  client islands.
+- Runtime image sources ≤ 2.5 MiB; hero ≤ 250 KiB; cursor files ≤ 20 KiB each.
+- Exactly one generated image preload and ≤ 170 KiB gzip initial modern JS.
+- Below-the-fold images are responsive and lazy; cursor assets load only after
+  fine-pointer interaction.
+- `overflow-x: hidden` prevents horizontal scroll from oversized art.
 
 ### Accessibility
 - Decorative images: `alt=""` + `aria-hidden`.

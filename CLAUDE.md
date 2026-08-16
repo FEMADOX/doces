@@ -5,8 +5,8 @@ Guidance for Claude Code working in this repo.
 ## What this is
 
 **PURO DOCE** — marketing + ordering site for a Curitiba brigadeiro/doces shop.
-Single long-scroll landing page with a Pix checkout (mock). Next.js App Router,
-React 19, TypeScript strict, Tailwind v4, Motion for animation.
+Single long-scroll landing page with a persisted cart and WhatsApp ordering flow.
+Next.js App Router, React 19, TypeScript strict, Tailwind v4, CSS animation.
 
 Originally a static HTML prototype; rebuilt as this Next.js app. The old
 prototype lived in the parent `doces/` folder and has been removed.
@@ -19,6 +19,8 @@ pnpm build      # next build
 pnpm start      # serve production build
 pnpm lint       # next lint
 npx tsc --noEmit  # typecheck (no emit)
+pnpm test:performance        # source + asset performance contracts
+pnpm test:performance:build  # post-build HTML + JS budgets
 ```
 
 > Server note: the user runs the dev server and previews themselves. Do NOT
@@ -29,33 +31,36 @@ npx tsc --noEmit  # typecheck (no emit)
 ```
 app/
   layout.tsx     # root: fonts (Bagel Fat One + Baloo 2), metadata, pt-BR
-  page.tsx       # composes all sections in order
-  globals.css    # Tailwind import, @theme tokens, keyframes, util classes
+  page.tsx       # composes all sections and client islands
+  globals.css    # Tailwind import, @theme tokens, keyframes, reveal/UI states
 components/
-  Header.tsx     # fixed top bar: logo, DOCES pill, cart, MENU overlay
+  Header.tsx     # top bar, cart control, CSS MENU overlay
   Hero.tsx       # "PURO DOCE" wordmark flanking centered cheesecake
   Marquee.tsx    # scrolling ticker strip
   Intro.tsx      # brand intro
-  Gallery.tsx    # photo grid (uses PhotoSlot)
-  Cardapio.tsx   # product menu -> add to cart
+  Gallery.tsx    # fixed photo grid
+  Cardapio.tsx   # server-rendered product menu
   Experience.tsx # full-bleed accent panel
   Curitiba.tsx   # local/delivery section
   CTA.tsx        # call to action
-  Footer.tsx     # links + giant outlined wordmark + sprinkling cutouts
-  CursorTrail.tsx# custom cursor effect
-  PhotoSlot.tsx  # image slot helper
+  Footer.tsx     # links + giant outlined wordmark
+  RevealObserver.tsx      # shared scroll-reveal client island
+  CursorTrail.tsx         # first-pointer cursor loader
+  CursorTrailRenderer.tsx # requestAnimationFrame cursor effect
   cart/
-    CartDrawer.tsx # slide-in cart + Pix checkout
+    AddToCartButton.tsx    # small cart mutation client island
+    DeferredCartDrawer.tsx # loads the drawer after first opening
+    CartDrawer.tsx         # CSS slide-in cart + WhatsApp checkout
 lib/
-  products.ts    # product catalog (id, name, price BRL, badge)
+  products.ts    # product catalog + static WebP imports
   cart-store.ts  # zustand store (persisted), useCart hook
-  order.ts       # WhatsApp order message + iFood/Rappi links (channel config)
+  order.ts       # WhatsApp order message + iFood/Rappi links
   pix.ts         # DORMANT mock Pix BR Code — kept on disk, not imported
-public/assets/   # all images; mouse/ holds footer ingredient cutouts
+public/assets/   # optimized WebPs; mouse/ contains tiny cursor cutouts
 ```
 
 Page order (`app/page.tsx`): Header → Hero → Marquee → Intro → Gallery →
-Cardapio → Experience → Curitiba → CTA → Footer → CartDrawer → CursorTrail.
+Cardapio → Experience → Curitiba → CTA → Footer → deferred cart → CursorTrail.
 
 ## Design system
 
@@ -70,19 +75,17 @@ Tokens live in `app/globals.css` `@theme` — use the Tailwind classes, not raw 
 
 ### Animation
 
-Two systems — keep them separate, never on the same element:
+- **CSS keyframes** drive ambient loops and hero entrance: `animate-floaty`,
+  `animate-floatySm`, `animate-wobble`, and the `hero-enter-*` classes.
+- **Scroll reveals** use `data-reveal` plus one `RevealObserver`. Reveal CSS
+  animates individual `translate`/`scale` properties so card hover `transform`
+  values compose safely.
+- **Cursor trail** uses one sleeping `requestAnimationFrame` loop in
+  `CursorTrailRenderer`; it loads only after fine-pointer movement.
 
-1. **CSS keyframes** (`globals.css`): `animate-floaty`, `animate-floatySm`,
-   `animate-wobble`, `animate-boing`, `animate-spinSlow`, `animate-drift`.
-   Tuned per-element via CSS custom props passed as inline `style` cast
-   `as React.CSSProperties` (e.g. `--dx`, `--dy`, `--r`).
-2. **Motion** (`motion/react`): `whileInView`, springs, `x`/`y`. Use for
-   scroll reveals and interactive springs.
-
-> Gotcha: CSS `transform` animations and Motion's `x`/`y` both write
-> `transform`. Putting both on one element fights. Pick one per element.
-
-`prefers-reduced-motion` is honored globally in `globals.css`.
+Never put two `transform` animations on one element. Use a wrapper when entry
+motion and an ambient loop both apply. `prefers-reduced-motion` is honored
+globally, and nonessential mobile loops use `.ambient-mobile-off`.
 
 ## Responsive
 
@@ -91,15 +94,25 @@ use Tailwind breakpoint prefixes (`sm:`, `md:`) so the desktop look is left
 untouched. When fixing mobile, add a breakpoint override — don't rewrite the
 desktop value.
 
+## Performance contracts
+
+- Runtime image sources ≤ 2.5 MiB.
+- Hero source ≤ 250 KiB; cursor sources ≤ 20 KiB each.
+- Exactly one generated image preload (hero only).
+- Initial modern JavaScript ≤ 170 KiB gzip.
+- Static visual sections must not become Client Components.
+
 ## Conventions
 
-- `"use client"` on any component using hooks, Motion, or browser APIs.
+- `"use client"` only on components using hooks or browser APIs; visual page
+  sections stay Server Components.
 - Imports use the `@/` alias (repo root).
-- Decorative `<img>`: `alt=""` + `aria-hidden`, and an eslint-disable for
-  `@next/next/no-img-element` (these cutouts intentionally bypass next/image).
-- Cart state via `useCart` (zustand, localStorage-persisted).
+- Content images use static `next/image` imports and explicit `sizes`; only the
+  hero is preloaded. Tiny deferred cursor `<img>` elements use `alt=""`,
+  `aria-hidden`, and an eslint disable.
+- Cart state uses `useCart` (zustand, localStorage-persisted).
 - Checkout routes through `lib/order.ts`: WhatsApp gets the cart as a pre-filled
-  `wa.me` message; iFood/Rappi are link-outs. Real number/URLs are placeholder
-  TODO constants there — don't assume they're live.
+  `wa.me` message; iFood/Rappi are link-outs. The WhatsApp number is configured;
+  iFood/Rappi URLs remain placeholders.
 - `lib/pix.ts` + the `qrcode` dep are **dormant** (kept, not imported). Don't
   wire them back in unless asked.
