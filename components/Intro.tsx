@@ -1,18 +1,9 @@
-"use client";
+import Image from "next/image";
+import type { CSSProperties } from "react";
+import chocoCakeImage from "@/public/assets/choco-cake.webp";
 
-import { motion } from "motion/react";
-import PhotoSlot from "@/components/PhotoSlot";
-
-const VIEWPORT = { once: true, margin: "-80px" } as const;
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: "easeOut", delay: i * 0.1 },
-  }),
-};
+const revealStyle = (delay: number, extra: CSSProperties = {}) =>
+  ({ ...extra, "--reveal-delay": `${delay}ms` }) as CSSProperties;
 
 export default function Intro() {
   return (
@@ -24,102 +15,78 @@ export default function Intro() {
         padding: "clamp(80px,11vw,160px) clamp(20px,5vw,72px)",
       }}
     >
-      {/* LEFT */}
       <div>
-        <motion.span
-          custom={0}
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={VIEWPORT}
+        <span
+          data-reveal
           className="inline-block rounded-full bg-[#EDDCC2] px-[14px] py-[7px] text-sm font-extrabold uppercase tracking-widest text-caramel"
+          style={revealStyle(0)}
         >
           Os clássicos
-        </motion.span>
+        </span>
 
-        <motion.h2
-          custom={1}
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={VIEWPORT}
+        <h2
+          data-reveal
           className="mt-[18px] font-display text-cacau"
-          style={{ fontSize: "clamp(38px,5.5vw,76px)", lineHeight: 0.96 }}
+          style={revealStyle(100, {
+            fontSize: "clamp(38px,5.5vw,76px)",
+            lineHeight: 0.96,
+          })}
         >
           cremoso <span className="text-caramel">fofinho</span> recheado
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          custom={2}
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={VIEWPORT}
+        <p
+          data-reveal
           className="mt-5 max-w-[480px] font-medium text-coffee"
-          style={{ fontSize: "clamp(15px,1.6vw,19px)" }}
+          style={revealStyle(200, { fontSize: "clamp(15px,1.6vw,19px)" })}
         >
           Nascemos em Curitiba em 2015 com uma ideia simples: doce de verdade,
           feito à mão, todo dia. O brigadeiro gourmet enrolado na hora —
           quentinho, cremoso e fresquinho.
-        </motion.p>
+        </p>
 
-        <motion.div
-          custom={3}
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={VIEWPORT}
-        >
+        <div data-reveal style={revealStyle(300)}>
           <a
             href="#cardapio"
-            className="mt-[26px] inline-block rounded-full bg-cacau px-8 py-[14px] text-lg font-extrabold text-white transition-all duration-150 hover:translate-y-[4px]"
-            style={{ boxShadow: "0 7px 0 #160B05" }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "0 3px 0 #160B05";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "0 7px 0 #160B05";
-            }}
+            className="press-button mt-[26px] inline-block rounded-full bg-cacau px-8 py-[14px] text-lg font-extrabold text-white"
+            style={{ "--button-shadow": "0 7px 0 #160B05" } as CSSProperties}
           >
             Ver cardápio
           </a>
-        </motion.div>
+        </div>
       </div>
 
-      {/* RIGHT */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.92 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={VIEWPORT}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+      <div
+        data-reveal
         className="relative mx-auto w-full max-w-[560px] rounded-[36px] p-[14px]"
-        style={{
+        style={revealStyle(100, {
+          "--reveal-scale": 0.92,
           background: "linear-gradient(135deg,#EFE0C8,#E7D2AE)",
           boxShadow: "0 30px 60px -30px rgba(90,52,20,.5)",
-        }}
+        } as CSSProperties)}
       >
-        {/* Decorative dots */}
         <span
-          className="animate-floatySm absolute -top-[10px] right-[24px] rounded-full bg-honey"
+          className="animate-floatySm ambient-mobile-off absolute -top-[10px] right-[24px] rounded-full bg-honey"
           style={{ width: 18, height: 18 }}
           aria-hidden
         />
         <span
-          className="animate-floaty absolute -bottom-[8px] left-[30px] rounded-full bg-toast"
+          className="animate-floaty ambient-mobile-off absolute -bottom-[8px] left-[30px] rounded-full bg-toast"
           style={{ width: 16, height: 16 }}
           aria-hidden
         />
 
-        <div className="aspect-[4/3] w-full overflow-hidden rounded-[26px]">
-          <PhotoSlot
-            slotId="intro-spread"
-            placeholder="Arraste uma foto dos seus doces"
-            defaultSrc="/assets/choco-cake.png"
-            radius={26}
-            className="h-full w-full"
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[26px]">
+          <Image
+            src={chocoCakeImage}
+            alt="Bolo de chocolate artesanal da PURO DOCE"
+            fill
+            loading="lazy"
+            sizes="(max-width: 768px) calc(100vw - 68px), 532px"
+            className="object-cover"
           />
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

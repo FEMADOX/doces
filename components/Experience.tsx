@@ -1,16 +1,9 @@
-"use client";
+import Image from "next/image";
+import type { CSSProperties } from "react";
+import experienceImage from "@/public/assets/experiencia-brigadeiro.webp";
 
-import { motion } from "motion/react";
-
-/**
- * EXPERIENCE — bold accent break section.
- *
- * Inspired by the CRAV "FOOD THAT FEELS GOOD" panel: a saturated full-bleed
- * color block with a big headline, corner mascot stickers, and a hero treat
- * peeking up from the bottom with googly cartoon eyes + two grabbing hands.
- *
- * Assets are our own (brigadeiro mascot + cheesecake). Swap freely later.
- */
+const revealStyle = (delay: number, extra: CSSProperties = {}) =>
+  ({ ...extra, "--reveal-delay": `${delay}ms` }) as CSSProperties;
 
 export default function Experience() {
   return (
@@ -18,11 +11,8 @@ export default function Experience() {
       id="experiencia"
       aria-label="A experiência PURO DOCE"
       className="relative overflow-hidden bg-caramel"
-      style={{
-        padding: "clamp(64px,9vw,120px) clamp(20px,5vw,56px) 0",
-      }}
+      style={{ padding: "clamp(64px,9vw,120px) clamp(20px,5vw,56px) 0" }}
     >
-      {/* warm radial glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -32,68 +22,65 @@ export default function Experience() {
         }}
       />
 
-      {/* headline */}
       <div className="relative z-[5] mx-auto flex max-w-[1180px] flex-col items-center text-center">
-        <motion.span
+        <span
+          data-reveal
           className="rounded-full bg-cream px-5 py-1.5 font-display tracking-wide text-caramel"
-          style={{ fontSize: "clamp(14px,1.6vw,22px)", boxShadow: "0 5px 0 rgba(58,28,10,.3)" }}
-          initial={{ opacity: 0, y: -16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          style={revealStyle(0, {
+            "--reveal-y": "-16px",
+            fontSize: "clamp(14px,1.6vw,22px)",
+            boxShadow: "0 5px 0 rgba(58,28,10,.3)",
+          } as CSSProperties)}
         >
           EXPERIÊNCIA
-        </motion.span>
+        </span>
 
-        <motion.h2
+        <h2
+          data-reveal
           className="font-display text-cream"
-          style={{
+          style={revealStyle(100, {
             fontSize: "clamp(48px,9vw,140px)",
             lineHeight: 0.92,
             marginTop: "clamp(12px,2vw,26px)",
             textShadow: "0 6px 0 rgba(58,28,10,.28)",
-          }}
-          initial={{ opacity: 0, y: 26 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          })}
         >
           DOCE QUE
           <br />
           FAZ BEM
-        </motion.h2>
+        </h2>
 
-        <motion.p
+        <p
+          data-reveal
           className="mt-5 max-w-[520px] font-body font-bold text-cream/90"
-          style={{ fontSize: "clamp(15px,1.6vw,19px)" }}
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
+          style={revealStyle(250, { fontSize: "clamp(15px,1.6vw,19px)" })}
         >
           Feito na hora, sem pó de pudim e sem pressa. Ingrediente de verdade,
           aquele carinho de confeitaria de bairro — direto pra Curitiba.
-        </motion.p>
+        </p>
       </div>
 
-      {/* big hero treat */}
       <div
         className="relative z-[4] mx-auto flex justify-center"
         style={{ marginTop: "clamp(24px,3vw,48px)", maxWidth: 1000 }}
       >
-        <motion.img
-          src="/assets/experiencia-brigadeiro.png"
-          alt="Brigadeiros artesanais com recheio cremoso — PURO DOCE"
-          className="animate-floatySm relative z-[5] block h-auto w-full rounded-[clamp(18px,2.5vw,32px)]"
-          style={{
-            maxWidth: "clamp(420px,68vw,860px)",
-            boxShadow: "0 30px 70px -20px rgba(58,28,10,.6)",
-          }}
-          initial={{ opacity: 0, y: 90, scale: 0.85 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
-        />
+        <div
+          data-reveal
+          className="w-full"
+          style={revealStyle(250, { "--reveal-y": "90px", "--reveal-scale": 0.85 } as CSSProperties)}
+        >
+          <Image
+            src={experienceImage}
+            alt="Brigadeiros artesanais com recheio cremoso — PURO DOCE"
+            loading="lazy"
+            sizes="(max-width: 768px) 92vw, 860px"
+            className="animate-floatySm ambient-mobile-off relative z-[5] mx-auto block h-auto w-full rounded-[clamp(18px,2.5vw,32px)]"
+            style={{
+              maxWidth: "clamp(420px,68vw,860px)",
+              boxShadow: "0 30px 70px -20px rgba(58,28,10,.6)",
+            }}
+          />
+        </div>
       </div>
     </section>
   );

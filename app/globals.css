@@ -63,6 +63,72 @@ body {
 .animate-spinSlow { animation: spinSlow 22s linear infinite; }
 .animate-drift { animation: drift 7s ease-in-out infinite; }
 
+/* ====== lightweight entry + interaction motion ====== */
+@keyframes heroEnterLeft {
+  from { opacity: 0; translate: -120px 0; }
+  to { opacity: 1; translate: none; }
+}
+@keyframes heroEnterRight {
+  from { opacity: 0; translate: 120px 0; }
+  to { opacity: 1; translate: none; }
+}
+@keyframes heroEnterUp {
+  from { opacity: 0; translate: 0 var(--hero-y, 24px); scale: var(--hero-scale, 1); }
+  to { opacity: 1; translate: none; scale: 1; }
+}
+@keyframes heroEnterPop {
+  from { opacity: 0; scale: .3; }
+  to { opacity: 1; scale: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-enter-left,
+  .hero-enter-right,
+  .hero-enter-up,
+  .hero-enter-pop {
+    opacity: 0;
+    animation-delay: var(--hero-delay, 0ms);
+    animation-fill-mode: both;
+  }
+  .hero-enter-left { animation-name: heroEnterLeft; animation-duration: 700ms; animation-timing-function: cubic-bezier(.22,1,.36,1); }
+  .hero-enter-right { animation-name: heroEnterRight; animation-duration: 700ms; animation-timing-function: cubic-bezier(.22,1,.36,1); }
+  .hero-enter-up { animation-name: heroEnterUp; animation-duration: 850ms; animation-timing-function: cubic-bezier(.22,1,.36,1); }
+  .hero-enter-pop { animation-name: heroEnterPop; animation-duration: 650ms; animation-timing-function: cubic-bezier(.34,1.56,.64,1); }
+}
+
+.product-add-button {
+  box-shadow: 0 4px 0 var(--color-caramel-dark);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.product-add-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--color-caramel-dark);
+}
+.press-button {
+  box-shadow: var(--button-shadow);
+  transition: transform 150ms ease, filter 150ms ease;
+}
+.press-button:active { transform: translateY(4px); filter: brightness(.98); }
+.gallery-card {
+  transform: translateY(var(--card-y, 0)) rotate(var(--card-rotate, 0deg));
+  transition: transform 300ms cubic-bezier(.22,1,.36,1), box-shadow 300ms ease;
+}
+.product-card { transition: transform 200ms ease, box-shadow 200ms ease; }
+
+@media (hover: hover) and (pointer: fine) {
+  .gallery-card:hover {
+    z-index: 10;
+    transform: translateY(-18px) rotate(0) scale(1.05);
+    box-shadow: 0 48px 80px -20px rgba(90,52,20,.7) !important;
+  }
+  .product-card:hover { transform: translateY(-6px); }
+  .press-button:hover { transform: translateY(2px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
