@@ -29,7 +29,7 @@ function walk(directory) {
 function sourceText() {
   return sourceRoots
     .flatMap(walk)
-    .filter((path) => /\.(?:ts|tsx|css)$/.test(path))
+    .filter((path) => /\.(?:[cm]?js|ts|tsx|css)$/.test(path))
     .map((path) => `${relative(root, path)}\n${readFileSync(path, "utf8")}`)
     .join("\n");
 }
