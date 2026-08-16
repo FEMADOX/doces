@@ -87,6 +87,12 @@ test("public photo editor is removed", () => {
   assert.doesNotMatch(sourceText(), /PhotoSlot|puro-doce-photo:|FileReader/);
 });
 
+test("gallery mascot is excluded from mobile rendering", () => {
+  const gallery = readFileSync(join(root, "components/Gallery.tsx"), "utf8");
+  assert.match(gallery, /className="[^"]*hidden[^"]*md:block[^"]*"/);
+  assert.match(gallery, /sizes="\(max-width: 767px\) 0px, 210px"/);
+});
+
 test("visual sections are server components", () => {
   for (const file of staticSections) {
     const text = readFileSync(join(root, "components", file), "utf8");

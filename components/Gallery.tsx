@@ -85,7 +85,7 @@ export default function Gallery() {
         <div
           data-reveal
           aria-hidden
-          className="pointer-events-none absolute z-[7]"
+          className="pointer-events-none absolute z-[7] hidden md:block"
           style={
             {
               "--reveal-scale": 0.4,
@@ -99,7 +99,7 @@ export default function Gallery() {
             src={mascotImage}
             alt=""
             loading="lazy"
-            sizes="(max-width: 768px) 0px, 210px"
+            sizes="(max-width: 767px) 0px, 210px"
             className="animate-floaty ambient-mobile-off block h-auto w-full"
             style={{ filter: "drop-shadow(0 14px 22px rgba(90,52,20,.35))" }}
           />
