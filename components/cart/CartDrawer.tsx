@@ -1,43 +1,43 @@
-"use client";
+'use client'
 
-import { useEffect, useMemo, useState } from "react";
-import { useCart } from "@/lib/cart-store";
-import { formatBRL } from "@/lib/products";
-import { buildWhatsappUrl, IFOOD_URL, RAPPI_URL } from "@/lib/order";
+import { useEffect, useMemo, useState } from 'react'
+import { useCart } from '@/lib/cart-store'
+import { buildWhatsappUrl, IFOOD_URL, RAPPI_URL } from '@/lib/order'
+import { formatBRL } from '@/lib/products'
 
-type View = "cart" | "form" | "done";
+type View = 'cart' | 'form' | 'done'
 
 export default function CartDrawer() {
-  const isOpen = useCart((state) => state.isOpen);
-  const close = useCart((state) => state.close);
-  const lines = useCart((state) => state.lines);
-  const setQty = useCart((state) => state.setQty);
-  const remove = useCart((state) => state.remove);
-  const clear = useCart((state) => state.clear);
+  const isOpen = useCart((state) => state.isOpen)
+  const close = useCart((state) => state.close)
+  const lines = useCart((state) => state.lines)
+  const setQty = useCart((state) => state.setQty)
+  const remove = useCart((state) => state.remove)
+  const clear = useCart((state) => state.clear)
 
   const total = useMemo(
     () => lines.reduce((sum, line) => sum + line.qty * line.price, 0),
-    [lines],
-  );
-  const count = lines.reduce((sum, line) => sum + line.qty, 0);
+    [lines]
+  )
+  const count = lines.reduce((sum, line) => sum + line.qty, 0)
 
-  const [view, setView] = useState<View>("cart");
-  const [form, setForm] = useState({ name: "", bairro: "" });
+  const [view, setView] = useState<View>('cart')
+  const [form, setForm] = useState({ name: '', bairro: '' })
 
   useEffect(() => {
-    if (isOpen) setView("cart");
-  }, [isOpen]);
+    if (isOpen) setView('cart')
+  }, [isOpen])
 
   const sendWhatsapp = () => {
-    if (lines.length === 0) return;
-    window.open(buildWhatsappUrl(lines, form), "_blank", "noopener");
-    setView("done");
-    clear();
-  };
+    if (lines.length === 0) return
+    window.open(buildWhatsappUrl(lines, form), '_blank', 'noopener')
+    setView('done')
+    clear()
+  }
 
   return (
     <div
-      className={`cart-layer ${isOpen ? "is-open" : ""}`}
+      className={`cart-layer ${isOpen ? 'is-open' : ''}`}
       aria-hidden={!isOpen}
     >
       <button
@@ -58,9 +58,9 @@ export default function CartDrawer() {
         <div className="flex items-center justify-between border-b-2 border-sand-2 px-6 py-5">
           <div className="flex items-center gap-2">
             <span className="font-display text-2xl text-caramel">
-              {view === "done" ? "Pedido feito!" : "Seu pedido"}
+              {view === 'done' ? 'Pedido feito!' : 'Seu pedido'}
             </span>
-            {view === "cart" && count > 0 ? (
+            {view === 'cart' && count > 0 ? (
               <span className="rounded-full bg-caramel px-2 py-0.5 text-xs font-extrabold text-white">
                 {count}
               </span>
@@ -77,20 +77,20 @@ export default function CartDrawer() {
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 py-5">
-          {view === "cart" ? (
+          {view === 'cart' ? (
             <CartView lines={lines} setQty={setQty} remove={remove} />
           ) : null}
-          {view === "form" ? <FormView form={form} setForm={setForm} /> : null}
-          {view === "done" ? <DoneView name={form.name} /> : null}
+          {view === 'form' ? <FormView form={form} setForm={setForm} /> : null}
+          {view === 'done' ? <DoneView name={form.name} /> : null}
         </div>
 
         <div className="border-t-2 border-sand-2 bg-cream px-6 py-5">
-          {view === "cart" ? (
+          {view === 'cart' ? (
             <>
               <Row label="Total" value={formatBRL(total)} big />
               <ActionButton
                 disabled={lines.length === 0}
-                onClick={() => setView("form")}
+                onClick={() => setView('form')}
               >
                 Fazer pedido
               </ActionButton>
@@ -98,7 +98,7 @@ export default function CartDrawer() {
             </>
           ) : null}
 
-          {view === "form" ? (
+          {view === 'form' ? (
             <>
               <Row label="Total" value={formatBRL(total)} big />
               <ActionButton
@@ -110,7 +110,7 @@ export default function CartDrawer() {
               <OtherChannels />
               <button
                 type="button"
-                onClick={() => setView("cart")}
+                onClick={() => setView('cart')}
                 className="mt-3 w-full text-sm font-bold text-coffee/70 hover:text-coffee"
               >
                 ← Voltar ao carrinho
@@ -118,23 +118,23 @@ export default function CartDrawer() {
             </>
           ) : null}
 
-          {view === "done" ? (
+          {view === 'done' ? (
             <ActionButton onClick={close}>Voltar à loja</ActionButton>
           ) : null}
         </div>
       </aside>
     </div>
-  );
+  )
 }
 
 function CartView({
   lines,
   setQty,
-  remove,
+  remove
 }: {
-  lines: ReturnType<typeof useCart.getState>["lines"];
-  setQty: (id: string, qty: number) => void;
-  remove: (id: string) => void;
+  lines: ReturnType<typeof useCart.getState>['lines']
+  setQty: (id: string, qty: number) => void
+  remove: (id: string) => void
 }) {
   if (lines.length === 0) {
     return (
@@ -145,7 +145,7 @@ function CartView({
           Escolha seus doces no cardápio e eles aparecem aqui.
         </p>
       </div>
-    );
+    )
   }
 
   return (
@@ -162,7 +162,9 @@ function CartView({
             <p className="truncate font-display text-[15px] leading-tight text-cacau">
               {line.name}
             </p>
-            <p className="text-sm font-bold text-caramel">{formatBRL(line.price)}</p>
+            <p className="text-sm font-bold text-caramel">
+              {formatBRL(line.price)}
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <Stepper onClick={() => setQty(line.id, line.qty - 1)}>−</Stepper>
@@ -182,18 +184,18 @@ function CartView({
         </li>
       ))}
     </ul>
-  );
+  )
 }
 
 function FormView({
   form,
-  setForm,
+  setForm
 }: {
-  form: { name: string; bairro: string };
-  setForm: (form: { name: string; bairro: string }) => void;
+  form: { name: string; bairro: string }
+  setForm: (form: { name: string; bairro: string }) => void
 }) {
   const field =
-    "w-full rounded-2xl border-2 border-sand-2 bg-white px-4 py-3 font-medium text-cacau outline-none transition focus:border-caramel";
+    'w-full rounded-2xl border-2 border-sand-2 bg-white px-4 py-3 font-medium text-cacau outline-none transition focus:border-caramel'
 
   return (
     <div className="flex flex-col gap-4">
@@ -224,12 +226,12 @@ function FormView({
         />
       </label>
     </div>
-  );
+  )
 }
 
 function OtherChannels() {
   const link =
-    "flex flex-1 items-center justify-center rounded-full border-2 border-sand-2 bg-white px-4 py-3 text-sm font-extrabold text-cacau no-underline transition hover:border-caramel hover:text-caramel";
+    'flex flex-1 items-center justify-center rounded-full border-2 border-sand-2 bg-white px-4 py-3 text-sm font-extrabold text-cacau no-underline transition hover:border-caramel hover:text-caramel'
 
   return (
     <div className="mt-3">
@@ -245,7 +247,7 @@ function OtherChannels() {
         </a>
       </div>
     </div>
-  );
+  )
 }
 
 function DoneView({ name }: { name: string }) {
@@ -255,22 +257,22 @@ function DoneView({ name }: { name: string }) {
         ✓
       </span>
       <p className="font-display text-2xl text-cacau">
-        Pedido enviado{name ? `, ${name.split(" ")[0]}` : ""}! 🍓
+        Pedido enviado{name ? `, ${name.split(' ')[0]}` : ''}! 🍓
       </p>
       <p className="max-w-[280px] text-sm text-coffee/80">
         Abrimos o WhatsApp com seu pedido — é só apertar enviar. A gente
         confirma os detalhes e o pagamento por lá.
       </p>
     </div>
-  );
+  )
 }
 
 function Stepper({
   children,
-  onClick,
+  onClick
 }: {
-  children: React.ReactNode;
-  onClick: () => void;
+  children: React.ReactNode
+  onClick: () => void
 }) {
   return (
     <button
@@ -280,36 +282,40 @@ function Stepper({
     >
       {children}
     </button>
-  );
+  )
 }
 
 function Row({
   label,
   value,
-  big,
+  big
 }: {
-  label: string;
-  value: string;
-  big?: boolean;
+  label: string
+  value: string
+  big?: boolean
 }) {
   return (
     <div className="mb-4 flex items-center justify-between">
       <span className="font-bold text-coffee">{label}</span>
-      <span className={big ? "font-display text-2xl text-cacau" : "font-bold text-cacau"}>
+      <span
+        className={
+          big ? 'font-display text-2xl text-cacau' : 'font-bold text-cacau'
+        }
+      >
         {value}
       </span>
     </div>
-  );
+  )
 }
 
 function ActionButton({
   children,
   onClick,
-  disabled,
+  disabled
 }: {
-  children: React.ReactNode;
-  onClick: () => void;
-  disabled?: boolean;
+  children: React.ReactNode
+  onClick: () => void
+  disabled?: boolean
 }) {
   return (
     <button
@@ -317,9 +323,9 @@ function ActionButton({
       onClick={onClick}
       disabled={disabled}
       className="cart-action-button w-full rounded-full bg-caramel px-6 py-4 font-display text-lg tracking-wide text-white transition disabled:cursor-not-allowed disabled:opacity-40"
-      style={{ boxShadow: disabled ? "none" : "0 6px 0 #7A4517" }}
+      style={{ boxShadow: disabled ? 'none' : '0 6px 0 #7A4517' }}
     >
       {children}
     </button>
-  );
+  )
 }

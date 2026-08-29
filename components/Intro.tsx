@@ -1,9 +1,9 @@
-import Image from "next/image";
-import type { CSSProperties } from "react";
-import chocoCakeImage from "@/public/assets/choco-cake.webp";
+import Image from 'next/image'
+import type { CSSProperties } from 'react'
+import chocoCakeImage from '@/public/assets/choco-cake.webp'
 
 const revealStyle = (delay: number, extra: CSSProperties = {}) =>
-  ({ ...extra, "--reveal-delay": `${delay}ms` }) as CSSProperties;
+  ({ ...extra, '--reveal-delay': `${delay}ms` }) as CSSProperties
 
 export default function Intro() {
   return (
@@ -11,8 +11,8 @@ export default function Intro() {
       id="sobre"
       className="grid grid-cols-1 items-center overflow-hidden bg-cream md:grid-cols-2"
       style={{
-        gap: "clamp(24px,5vw,64px)",
-        padding: "clamp(80px,11vw,160px) clamp(20px,5vw,72px)",
+        gap: 'clamp(24px,5vw,64px)',
+        padding: 'clamp(80px,11vw,160px) clamp(20px,5vw,72px)'
       }}
     >
       <div>
@@ -28,8 +28,8 @@ export default function Intro() {
           data-reveal
           className="mt-[18px] font-display text-cacau"
           style={revealStyle(100, {
-            fontSize: "clamp(38px,5.5vw,76px)",
-            lineHeight: 0.96,
+            fontSize: 'clamp(38px,5.5vw,76px)',
+            lineHeight: 0.96
           })}
         >
           cremoso <span className="text-caramel">fofinho</span> recheado
@@ -38,7 +38,7 @@ export default function Intro() {
         <p
           data-reveal
           className="mt-5 max-w-[480px] font-medium text-coffee"
-          style={revealStyle(200, { fontSize: "clamp(15px,1.6vw,19px)" })}
+          style={revealStyle(200, { fontSize: 'clamp(15px,1.6vw,19px)' })}
         >
           Nascemos em Curitiba em 2015 com uma ideia simples: doce de verdade,
           feito à mão, todo dia. O brigadeiro gourmet enrolado na hora —
@@ -49,7 +49,7 @@ export default function Intro() {
           <a
             href="#cardapio"
             className="press-button mt-[26px] inline-block rounded-full bg-cacau px-8 py-[14px] text-lg font-extrabold text-white"
-            style={{ "--button-shadow": "0 7px 0 #160B05" } as CSSProperties}
+            style={{ '--button-shadow': '0 7px 0 #160B05' } as CSSProperties}
           >
             Ver cardápio
           </a>
@@ -60,9 +60,9 @@ export default function Intro() {
         data-reveal
         className="relative mx-auto w-full max-w-[560px] rounded-[36px] p-[14px]"
         style={revealStyle(100, {
-          "--reveal-scale": 0.92,
-          background: "linear-gradient(135deg,#EFE0C8,#E7D2AE)",
-          boxShadow: "0 30px 60px -30px rgba(90,52,20,.5)",
+          '--reveal-scale': 0.92,
+          background: 'linear-gradient(135deg,#EFE0C8,#E7D2AE)',
+          boxShadow: '0 30px 60px -30px rgba(90,52,20,.5)'
         } as CSSProperties)}
       >
         <span
@@ -88,5 +88,5 @@ export default function Intro() {
         </div>
       </div>
     </section>
-  );
+  )
 }

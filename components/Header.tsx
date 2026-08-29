@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { useState, type CSSProperties } from "react";
-import { useCart } from "@/lib/cart-store";
+import { type CSSProperties, useState } from 'react'
+import { useCart } from '@/lib/cart-store'
 
-type NavLink = { label: string; href: string };
+type NavLink = { label: string; href: string }
 
 const NAV_LINKS: NavLink[] = [
-  { label: "Início", href: "#topo" },
-  { label: "Cardápio", href: "#cardapio" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Curitiba", href: "#curitiba" },
-  { label: "Contato", href: "#contato" },
-];
+  { label: 'Início', href: '#topo' },
+  { label: 'Cardápio', href: '#cardapio' },
+  { label: 'Sobre', href: '#sobre' },
+  { label: 'Curitiba', href: '#curitiba' },
+  { label: 'Contato', href: '#contato' }
+]
 
 function CartIcon() {
   return (
@@ -30,26 +30,26 @@ function CartIcon() {
       <path d="M3 6h18" />
       <path d="M16 10a4 4 0 0 1-8 0" />
     </svg>
-  );
+  )
 }
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false)
   const count = useCart((state) =>
-    state.lines.reduce((total, line) => total + line.qty, 0),
-  );
-  const toggleCart = useCart((state) => state.toggle);
+    state.lines.reduce((total, line) => total + line.qty, 0)
+  )
+  const toggleCart = useCart((state) => state.toggle)
 
   return (
     <>
       <header
         className="absolute top-0 right-0 left-0 z-[70] flex items-center justify-between"
-        style={{ padding: "22px clamp(20px, 5vw, 56px)" }}
+        style={{ padding: '22px clamp(20px, 5vw, 56px)' }}
       >
         <a
           href="#topo"
           className="stroke-cream-thin font-display text-caramel no-underline"
-          style={{ fontSize: "clamp(28px, 3.4vw, 40px)", lineHeight: 1 }}
+          style={{ fontSize: 'clamp(28px, 3.4vw, 40px)', lineHeight: 1 }}
         >
           DOCE
         </a>
@@ -58,7 +58,7 @@ export default function Header() {
           <a
             href="#cardapio"
             className="hidden rounded-full bg-caramel px-[22px] py-3 font-body text-sm font-extrabold tracking-wide text-white no-underline sm:inline-block"
-            style={{ boxShadow: "0 5px 0 #7A4517" }}
+            style={{ boxShadow: '0 5px 0 #7A4517' }}
           >
             DOCES
           </a>
@@ -66,9 +66,9 @@ export default function Header() {
           <button
             type="button"
             onClick={toggleCart}
-            aria-label={`Abrir carrinho${count > 0 ? `, ${count} itens` : ""}`}
+            aria-label={`Abrir carrinho${count > 0 ? `, ${count} itens` : ''}`}
             className="relative inline-flex h-12 w-12 items-center justify-center rounded-full border-2 border-sand-2 bg-white text-caramel-dark transition-transform hover:-translate-y-0.5"
-            style={{ boxShadow: "0 5px 0 #E8D4B6" }}
+            style={{ boxShadow: '0 5px 0 #E8D4B6' }}
           >
             <CartIcon />
             {count > 0 ? (
@@ -85,7 +85,7 @@ export default function Header() {
             aria-expanded={menuOpen}
             aria-controls="site-menu"
             className="inline-flex items-center gap-2.5 rounded-full border-2 border-sand-2 bg-white px-[18px] py-3 font-body text-sm font-extrabold tracking-wide text-caramel-dark transition-transform hover:-translate-y-0.5"
-            style={{ boxShadow: "0 5px 0 #E8D4B6" }}
+            style={{ boxShadow: '0 5px 0 #E8D4B6' }}
           >
             MENU
             <span className="flex flex-col gap-[3px]" aria-hidden="true">
@@ -103,9 +103,9 @@ export default function Header() {
       <div
         id="site-menu"
         className={`menu-overlay fixed inset-0 z-[95] flex flex-col items-center justify-center gap-2 ${
-          menuOpen ? "is-open" : ""
+          menuOpen ? 'is-open' : ''
         }`}
-        style={{ background: "linear-gradient(150deg, #B5651D, #7A4517)" }}
+        style={{ background: 'linear-gradient(150deg, #B5651D, #7A4517)' }}
         role="dialog"
         aria-modal="true"
         aria-label="Menu de navegação"
@@ -141,9 +141,9 @@ export default function Header() {
               className="font-display text-white no-underline hover:text-honey"
               style={
                 {
-                  "--menu-index": index,
-                  fontSize: "clamp(40px, 7vw, 76px)",
-                  lineHeight: 1.05,
+                  '--menu-index': index,
+                  fontSize: 'clamp(40px, 7vw, 76px)',
+                  lineHeight: 1.05
                 } as CSSProperties
               }
             >
@@ -157,5 +157,5 @@ export default function Header() {
         </p>
       </div>
     </>
-  );
+  )
 }
