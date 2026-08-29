@@ -1,5 +1,5 @@
-import { formatBRL } from "./products";
-import type { CartLine } from "./cart-store";
+import type { CartLine } from './cart-store'
+import { formatBRL } from './products'
 
 /**
  * Order routing — sends the cart to the shop's real ordering channels.
@@ -13,47 +13,47 @@ import type { CartLine } from "./cart-store";
 
 // Digits only, with country code. Brazil: 55 + DDD + number.
 // Shop line: 41 9543-0718  ->  55 41 95430718
-export const WHATSAPP_NUMBER = "554195430718";
+export const WHATSAPP_NUMBER = '5541987329409'
 
 // Storefront URLs on each marketplace (full https:// links).
-export const IFOOD_URL = "https://www.ifood.com.br/"; // TODO: real iFood page
-export const RAPPI_URL = "https://www.rappi.com.br/"; // TODO: real Rappi page
+export const IFOOD_URL = 'https://www.ifood.com.br/' // TODO: real iFood page
+export const RAPPI_URL = 'https://www.rappi.com.br/' // TODO: real Rappi page
 
 export type OrderForm = {
-  name: string;
-  bairro: string;
-};
+  name: string
+  bairro: string
+}
 
 /** Build the human-readable order message sent over WhatsApp. */
 export function buildOrderMessage(lines: CartLine[], form: OrderForm): string {
-  const total = lines.reduce((n, l) => n + l.qty * l.price, 0);
+  const total = lines.reduce((n, l) => n + l.qty * l.price, 0)
 
   const items = lines
     .map((l) => `• ${l.qty}x ${l.name} — ${formatBRL(l.qty * l.price)}`)
-    .join("\n");
+    .join('\n')
 
   const details = [
     form.name.trim() && `Nome: ${form.name.trim()}`,
-    form.bairro.trim() && `Bairro: ${form.bairro.trim()}`,
+    form.bairro.trim() && `Bairro: ${form.bairro.trim()}`
   ]
     .filter(Boolean)
-    .join("\n");
+    .join('\n')
 
   return [
-    "Olá! Quero fazer um pedido 🍓",
-    "",
+    'Olá! Quero fazer um pedido 🍓',
+    '',
     details,
-    "",
+    '',
     items,
-    "",
-    `Total: ${formatBRL(total)}`,
+    '',
+    `Total: ${formatBRL(total)}`
   ]
     .filter((part) => part !== undefined)
-    .join("\n");
+    .join('\n')
 }
 
 /** wa.me deep link with the order message pre-filled. */
 export function buildWhatsappUrl(lines: CartLine[], form: OrderForm): string {
-  const text = encodeURIComponent(buildOrderMessage(lines, form));
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+  const text = encodeURIComponent(buildOrderMessage(lines, form))
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`
 }

@@ -9,23 +9,23 @@
  * @returns {boolean} whether another animation frame is needed
  */
 export function advanceTrail(points, target, factors) {
-  let leader = target;
-  let unsettled = false;
+  let leader = target
+  let unsettled = false
 
   points.forEach((point, index) => {
-    const factor = factors[index];
-    point.x += (leader.x - point.x) * factor;
-    point.y += (leader.y - point.y) * factor;
+    const factor = factors[index]
+    point.x += (leader.x - point.x) * factor
+    point.y += (leader.y - point.y) * factor
 
     if (
       Math.abs(leader.x - point.x) > 0.1 ||
       Math.abs(leader.y - point.y) > 0.1
     ) {
-      unsettled = true;
+      unsettled = true
     }
 
-    leader = point;
-  });
+    leader = point
+  })
 
-  return unsettled;
+  return unsettled
 }

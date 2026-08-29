@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import type { CartProduct } from "@/lib/products";
-import { useCart } from "@/lib/cart-store";
+import { useCart } from '@/lib/cart-store'
+import type { CartProduct } from '@/lib/products'
 
 export default function AddToCartButton({ product }: { product: CartProduct }) {
-  const add = useCart((state) => state.add);
+  const add = useCart((state) => state.add)
 
   return (
     <button
@@ -14,5 +14,5 @@ export default function AddToCartButton({ product }: { product: CartProduct }) {
     >
       + Adicionar
     </button>
-  );
+  )
 }

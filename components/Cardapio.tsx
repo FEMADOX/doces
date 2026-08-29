@@ -1,7 +1,7 @@
-import Image from "next/image";
-import type { CSSProperties } from "react";
-import AddToCartButton from "@/components/cart/AddToCartButton";
-import { formatBRL, products } from "@/lib/products";
+import Image from 'next/image'
+import type { CSSProperties } from 'react'
+import AddToCartButton from '@/components/cart/AddToCartButton'
+import { formatBRL, products } from '@/lib/products'
 
 export default function Cardapio() {
   return (
@@ -9,27 +9,27 @@ export default function Cardapio() {
       id="cardapio"
       className="relative overflow-hidden"
       style={{
-        padding: "clamp(64px,9vw,120px) clamp(20px,5vw,72px)",
+        padding: 'clamp(64px,9vw,120px) clamp(20px,5vw,72px)',
         background:
-          "radial-gradient(120% 90% at 50% 0%, #EFE0C8 0%, #F7ECDD 60%)",
+          'radial-gradient(120% 90% at 50% 0%, #EFE0C8 0%, #F7ECDD 60%)'
       }}
     >
       <div className="mx-auto mb-14 max-w-[760px] text-center" data-reveal>
         <span
           className="inline-block rounded-full bg-white px-[14px] py-[7px] text-sm font-extrabold uppercase tracking-widest text-caramel"
-          style={{ boxShadow: "0 6px 18px rgba(122,69,23,0.12)" }}
+          style={{ boxShadow: '0 6px 18px rgba(122,69,23,0.12)' }}
         >
           Cardápio
         </span>
         <h2
           className="mt-[18px] font-display text-cacau"
-          style={{ fontSize: "clamp(38px,5.5vw,76px)", lineHeight: 0.96 }}
+          style={{ fontSize: 'clamp(38px,5.5vw,76px)', lineHeight: 0.96 }}
         >
           os <span className="text-caramel">queridinhos</span> de Curitiba
         </h2>
         <p
           className="mx-auto mt-[18px] max-w-[520px] font-medium text-coffee"
-          style={{ fontSize: "clamp(15px,1.6vw,19px)" }}
+          style={{ fontSize: 'clamp(15px,1.6vw,19px)' }}
         >
           Do campeão de vendas aos lançamentos que viralizam no delivery. Monte
           seu pedido e finalize pelo WhatsApp.
@@ -44,8 +44,8 @@ export default function Cardapio() {
             className="product-card flex flex-col overflow-hidden rounded-[28px] border-2 border-sand-2 bg-white"
             style={
               {
-                "--reveal-delay": `${index * 80}ms`,
-                boxShadow: "0 14px 34px rgba(42,24,16,0.10)",
+                '--reveal-delay': `${index * 80}ms`,
+                boxShadow: '0 14px 34px rgba(42,24,16,0.10)'
               } as CSSProperties
             }
           >
@@ -60,7 +60,7 @@ export default function Cardapio() {
               />
               <span
                 className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[13px] font-extrabold text-caramel-dark"
-                style={{ boxShadow: "0 4px 14px rgba(42,24,16,0.16)" }}
+                style={{ boxShadow: '0 4px 14px rgba(42,24,16,0.16)' }}
               >
                 <span>{product.badgeIcon}</span>
                 {product.badge}
@@ -84,7 +84,7 @@ export default function Cardapio() {
                     id: product.id,
                     name: product.name,
                     price: product.price,
-                    badgeIcon: product.badgeIcon,
+                    badgeIcon: product.badgeIcon
                   }}
                 />
               </div>
@@ -93,5 +93,5 @@ export default function Cardapio() {
         ))}
       </div>
     </section>
-  );
+  )
 }
