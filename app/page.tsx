@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next'
 import Cardapio from '@/components/Cardapio'
 import CTA from '@/components/CTA'
 import Curitiba from '@/components/Curitiba'
@@ -28,6 +29,7 @@ export default function Home() {
       <Footer />
       <DeferredCartDrawer />
       <CursorTrail />
+      <Analytics />
     </main>
   )
 }

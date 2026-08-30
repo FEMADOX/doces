@@ -47,7 +47,7 @@ export default function Footer() {
       </div>
 
       <div
-        className="mt-10 pt-[22px] text-center text-sm"
+        className="mt-10 pt-[22px] pb-4 text-center text-sm"
         style={{
           borderTop: '2px solid rgba(255,255,255,.12)',
           color: '#A8906C'
@@ -57,19 +57,17 @@ export default function Footer() {
       </div>
 
       <div
-        className="relative overflow-hidden"
+        className="hidden md:block relative overflow-hidden"
         style={{
           paddingTop: 'clamp(60px,9vw,130px)',
           paddingBottom: 'clamp(20px,3vw,44px)'
         }}
       >
         <div
-          data-reveal
           className="stroke-cream text-center font-display leading-tight text-caramel"
           style={
             {
-              '--reveal-y': '60px',
-              fontSize: 'clamp(70px,17vw,260px)',
+              fontSize: 'clamp(64px,15.5vw,240px)',
               lineHeight: 0.9,
               whiteSpace: 'nowrap'
             } as CSSProperties

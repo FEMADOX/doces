@@ -184,11 +184,11 @@ export default function Hero() {
           style={{ transform: 'translateY(clamp(20px,3vw,48px))' }}
         >
           <p
-            className="hero-enter-up max-w-[360px] font-body font-bold text-cacau"
+            className="hero-enter-up max-w-[380px] rounded-[24px] border border-caramel/20 bg-cream/90 px-5 py-4 font-body font-bold leading-relaxed text-cacau shadow-[0_10px_24px_rgba(74,42,26,.16)] backdrop-blur-[3px]"
             style={{
               ...heroDelay(750),
               fontSize: 'clamp(15px,1.45vw,18px)',
-              textShadow: '0 1px 0 rgba(247,236,221,.9)'
+              textShadow: '0 1px 0 rgba(255,255,255,.65)'
             }}
           >
             Brigadeiro gourmet enrolado na hora, com leite condensado de verdade
@@ -196,11 +196,11 @@ export default function Hero() {
           </p>
 
           <p
-            className="hero-enter-up max-w-[360px] font-body font-bold text-cacau md:text-right"
+            className="hero-enter-up max-w-[380px] rounded-[24px] border border-caramel/20 bg-cream/90 px-5 py-4 font-body font-bold leading-relaxed text-cacau shadow-[0_10px_24px_rgba(74,42,26,.16)] backdrop-blur-[3px] md:text-right"
             style={{
               ...heroDelay(900),
               fontSize: 'clamp(15px,1.45vw,18px)',
-              textShadow: '0 1px 0 rgba(247,236,221,.9)'
+              textShadow: '0 1px 0 rgba(255,255,255,.65)'
             }}
           >
             Bolos, brownies e cheesecakes feitos fresquinhos todo dia — do nosso

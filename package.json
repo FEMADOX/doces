@@ -14,6 +14,7 @@
     "test:performance:build": "node --test tests/build-performance.test.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "next": "^16.2.9",
     "puro-doce": "link:",
     "qrcode": "^1.5.4",
