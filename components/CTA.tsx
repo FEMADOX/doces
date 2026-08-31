@@ -11,26 +11,26 @@ export default function CTA() {
     >
       <span
         aria-hidden
-        className="animate-floaty ambient-mobile-off absolute z-[1] rounded-full bg-honey"
+        className="animate-floaty ambient-mobile-off absolute z-1 rounded-full bg-honey"
         style={{ width: 22, height: 22, top: '12%', left: '8%' }}
       />
       <span
         aria-hidden
-        className="animate-floatySm ambient-mobile-off absolute z-[1] rounded-full bg-toast"
+        className="animate-floatySm ambient-mobile-off absolute z-1 rounded-full bg-toast"
         style={{ width: 18, height: 18, top: '18%', right: '10%' }}
       />
       <span
         aria-hidden
-        className="animate-floatySm ambient-mobile-off absolute z-[1] rounded-full bg-mocha"
+        className="animate-floatySm ambient-mobile-off absolute z-1 rounded-full bg-mocha"
         style={{ width: 20, height: 20, bottom: '14%', left: '12%' }}
       />
       <span
         aria-hidden
-        className="animate-floaty ambient-mobile-off absolute z-[1] rounded-full bg-white"
+        className="animate-floaty ambient-mobile-off absolute z-1 rounded-full bg-white"
         style={{ width: 18, height: 18, bottom: '16%', right: '9%' }}
       />
 
-      <div data-reveal className="relative z-[2]">
+      <div data-reveal className="relative z-2">
         <span className="text-sm font-extrabold uppercase tracking-[.18em] text-sand-2">
           Sente
         </span>
@@ -45,7 +45,7 @@ export default function CTA() {
           sinta a doçura
         </h2>
         <p
-          className="mx-auto mt-[22px] max-w-[560px] font-medium text-sand"
+          className="mx-auto mt-5.5 max-w-140 font-medium text-sand"
           style={{ fontSize: 'clamp(16px,1.7vw,20px)' }}
         >
           Feito pra quem ama doce de verdade, aqui em Curitiba. Cada camada
@@ -53,7 +53,7 @@ export default function CTA() {
         </p>
         <a
           href="#cardapio"
-          className="press-button mt-[30px] inline-block rounded-full bg-white px-11 py-[17px] font-body text-[21px] font-extrabold text-caramel hover:bg-honey"
+          className="press-button mt-7.5 inline-block rounded-full bg-white px-11 py-4.25 font-body text-[21px] font-extrabold text-caramel hover:bg-honey"
           style={{ '--button-shadow': '0 9px 0 #7A4517' } as CSSProperties}
         >
           Pega Agora!

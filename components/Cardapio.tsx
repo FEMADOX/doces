@@ -14,21 +14,21 @@ export default function Cardapio() {
           'radial-gradient(120% 90% at 50% 0%, #EFE0C8 0%, #F7ECDD 60%)'
       }}
     >
-      <div className="mx-auto mb-14 max-w-[760px] text-center" data-reveal>
+      <div className="mx-auto mb-14 max-w-190 text-center" data-reveal>
         <span
-          className="inline-block rounded-full bg-white px-[14px] py-[7px] text-sm font-extrabold uppercase tracking-widest text-caramel"
+          className="inline-block rounded-full bg-white px-3.5 py-1.75 text-sm font-extrabold uppercase tracking-widest text-caramel"
           style={{ boxShadow: '0 6px 18px rgba(122,69,23,0.12)' }}
         >
           Cardápio
         </span>
         <h2
-          className="mt-[18px] font-display text-cacau"
+          className="mt-4.5 font-display text-cacau"
           style={{ fontSize: 'clamp(38px,5.5vw,76px)', lineHeight: 0.96 }}
         >
           os <span className="text-caramel">queridinhos</span> de Curitiba
         </h2>
         <p
-          className="mx-auto mt-[18px] max-w-[520px] font-medium text-coffee"
+          className="mx-auto mt-4.5 max-w-130 font-medium text-coffee"
           style={{ fontSize: 'clamp(15px,1.6vw,19px)' }}
         >
           Do campeão de vendas aos lançamentos que viralizam no delivery. Monte
@@ -36,7 +36,7 @@ export default function Cardapio() {
         </p>
       </div>
 
-      <div className="mx-auto grid max-w-[1120px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto grid max-w-280 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product, index) => (
           <article
             key={product.id}
@@ -49,7 +49,7 @@ export default function Cardapio() {
               } as CSSProperties
             }
           >
-            <div className="relative h-[200px] overflow-hidden">
+            <div className="relative h-50 overflow-hidden">
               <Image
                 src={product.defaultImage}
                 alt={product.name}
@@ -67,7 +67,7 @@ export default function Cardapio() {
               </span>
             </div>
 
-            <div className="flex grow flex-col p-[22px] pb-[26px]">
+            <div className="flex grow flex-col p-5.5 pb-6.5">
               <h3 className="font-display text-2xl leading-tight text-cacau">
                 {product.name}
               </h3>

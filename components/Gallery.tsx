@@ -80,13 +80,13 @@ export default function Gallery() {
       </div>
 
       <div
-        className="relative mx-auto flex max-w-[1260px] flex-wrap items-center justify-center"
+        className="relative mx-auto flex max-w-315 flex-wrap items-center justify-center"
         style={{ gap: 'clamp(10px,1.8vw,30px)' }}
       >
         <div
           data-reveal
           aria-hidden
-          className="pointer-events-none absolute z-[7] hidden md:block"
+          className="pointer-events-none absolute z-7 hidden md:block"
           style={
             {
               '--reveal-scale': 0.4,
