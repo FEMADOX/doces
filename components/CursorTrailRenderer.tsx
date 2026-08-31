@@ -60,7 +60,7 @@ export default function CursorTrailRenderer({ initialX, initialY }: Props) {
   }, [])
 
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-[60]">
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-60">
       {ITEMS.map((item, index) => (
         <Image
           key={item.src}

@@ -113,13 +113,13 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-295 flex-col items-center">
         <div
           className="relative flex w-full items-center justify-center"
           style={{ minHeight: 'clamp(360px,44vw,600px)' }}
         >
           <div
-            className="pointer-events-none absolute inset-x-0 z-[1] flex items-center justify-center"
+            className="pointer-events-none absolute inset-x-0 z-1 flex items-center justify-center"
             style={{
               gap: 'clamp(40px,12vw,220px)',
               transform: 'translateY(clamp(-215px,-13.5vw,-125px))'
@@ -151,7 +151,7 @@ export default function Hero() {
           </div>
 
           <div
-            className="relative z-[3]"
+            className="relative z-3"
             style={{ transform: 'translateY(clamp(10px,2vw,32px))' }}
           >
             <div
@@ -180,11 +180,11 @@ export default function Hero() {
         </div>
 
         <div
-          className="mt-10 flex w-full max-w-[1180px] flex-col items-center gap-6 text-center md:flex-row md:items-start md:justify-between md:gap-8 md:text-left"
+          className="mt-10 flex w-full max-w-295 flex-col items-center gap-6 text-center md:flex-row md:items-start md:justify-between md:gap-8 md:text-left"
           style={{ transform: 'translateY(clamp(20px,3vw,48px))' }}
         >
           <p
-            className="hero-enter-up max-w-[380px] rounded-[24px] border border-caramel/20 bg-cream/90 px-5 py-4 font-body font-bold leading-relaxed text-cacau shadow-[0_10px_24px_rgba(74,42,26,.16)] backdrop-blur-[3px]"
+            className="hero-enter-up max-w-95 rounded-3xl border border-caramel/20 bg-cream/90 px-5 py-4 font-body font-bold leading-relaxed text-cacau shadow-[0_10px_24px_rgba(74,42,26,.16)] backdrop-blur-[3px]"
             style={{
               ...heroDelay(750),
               fontSize: 'clamp(15px,1.45vw,18px)',
@@ -196,7 +196,7 @@ export default function Hero() {
           </p>
 
           <p
-            className="hero-enter-up max-w-[380px] rounded-[24px] border border-caramel/20 bg-cream/90 px-5 py-4 font-body font-bold leading-relaxed text-cacau shadow-[0_10px_24px_rgba(74,42,26,.16)] backdrop-blur-[3px] md:text-right"
+            className="hero-enter-up max-w-95 rounded-3xl border border-caramel/20 bg-cream/90 px-5 py-4 font-body font-bold leading-relaxed text-cacau shadow-[0_10px_24px_rgba(74,42,26,.16)] backdrop-blur-[3px] md:text-right"
             style={{
               ...heroDelay(900),
               fontSize: 'clamp(15px,1.45vw,18px)',

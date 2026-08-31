@@ -23,7 +23,7 @@ const Experience = () => (
       }}
     />
 
-    <div className="relative z-[5] mx-auto flex max-w-[1180px] flex-col items-center text-center">
+    <div className="relative z-5 mx-auto flex max-w-295 flex-col items-center text-center">
       <span
         data-reveal
         className="rounded-full bg-cream px-5 py-1.5 font-display tracking-wide text-caramel"
@@ -53,7 +53,7 @@ const Experience = () => (
 
       <p
         data-reveal
-        className="mt-5 max-w-[520px] font-body font-bold text-cream/90"
+        className="mt-5 max-w-130 font-body font-bold text-cream/90"
         style={revealStyle(250, { fontSize: 'clamp(15px,1.6vw,19px)' })}
       >
         Feito na hora, sem pó de pudim e sem pressa. Ingrediente de verdade,
@@ -62,7 +62,7 @@ const Experience = () => (
     </div>
 
     <div
-      className="relative z-[4] mx-auto flex justify-center"
+      className="relative z-4 mx-auto flex justify-center"
       style={{ marginTop: 'clamp(24px,3vw,48px)', maxWidth: 1000 }}
     >
       <div
@@ -80,7 +80,7 @@ const Experience = () => (
           height={854}
           loading="lazy"
           sizes="(max-width: 768px) 92vw, 860px"
-          className="animate-floatySm ambient-mobile-off relative z-[5] mx-auto block h-auto w-full rounded-[clamp(18px,2.5vw,32px)]"
+          className="animate-floatySm ambient-mobile-off relative z-5 mx-auto block h-auto w-full rounded-[clamp(18px,2.5vw,32px)]"
           style={{
             maxWidth: 'clamp(420px,68vw,860px)',
             boxShadow: '0 30px 70px -20px rgba(58,28,10,.6)'

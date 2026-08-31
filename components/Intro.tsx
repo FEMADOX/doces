@@ -18,7 +18,7 @@ export default function Intro() {
       <div>
         <span
           data-reveal
-          className="inline-block rounded-full bg-[#EDDCC2] px-[14px] py-[7px] text-sm font-extrabold uppercase tracking-widest text-caramel"
+          className="inline-block rounded-full bg-[#EDDCC2] px-3.5 py-1.75 text-sm font-extrabold uppercase tracking-widest text-caramel"
           style={revealStyle(0)}
         >
           Os clássicos
@@ -26,7 +26,7 @@ export default function Intro() {
 
         <h2
           data-reveal
-          className="mt-[18px] font-display text-cacau"
+          className="mt-4.5 font-display text-cacau"
           style={revealStyle(100, {
             fontSize: 'clamp(38px,5.5vw,76px)',
             lineHeight: 0.96
@@ -37,7 +37,7 @@ export default function Intro() {
 
         <p
           data-reveal
-          className="mt-5 max-w-[480px] font-medium text-coffee"
+          className="mt-5 max-w-120 font-medium text-coffee"
           style={revealStyle(200, { fontSize: 'clamp(15px,1.6vw,19px)' })}
         >
           Nascemos em Curitiba em 2015 com uma ideia simples: doce de verdade,
@@ -48,7 +48,7 @@ export default function Intro() {
         <div data-reveal style={revealStyle(300)}>
           <a
             href="#cardapio"
-            className="press-button mt-[26px] inline-block rounded-full bg-cacau px-8 py-[14px] text-lg font-extrabold text-white"
+            className="press-button mt-6.5 inline-block rounded-full bg-cacau px-8 py-3.5 text-lg font-extrabold text-white"
             style={{ '--button-shadow': '0 7px 0 #160B05' } as CSSProperties}
           >
             Ver cardápio
@@ -58,7 +58,7 @@ export default function Intro() {
 
       <div
         data-reveal
-        className="relative mx-auto w-full max-w-[560px] rounded-[36px] p-[14px]"
+        className="relative mx-auto w-full max-w-140 rounded-[36px] p-3.5"
         style={revealStyle(100, {
           '--reveal-scale': 0.92,
           background: 'linear-gradient(135deg,#EFE0C8,#E7D2AE)',
@@ -66,17 +66,17 @@ export default function Intro() {
         } as CSSProperties)}
       >
         <span
-          className="animate-floatySm ambient-mobile-off absolute -top-[10px] right-[24px] rounded-full bg-honey"
+          className="animate-floatySm ambient-mobile-off absolute -top-2.5 right-6 rounded-full bg-honey"
           style={{ width: 18, height: 18 }}
           aria-hidden
         />
         <span
-          className="animate-floaty ambient-mobile-off absolute -bottom-[8px] left-[30px] rounded-full bg-toast"
+          className="animate-floaty ambient-mobile-off absolute -bottom-2 left-7.5 rounded-full bg-toast"
           style={{ width: 16, height: 16 }}
           aria-hidden
         />
 
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[26px]">
+        <div className="relative aspect-4/3 w-full overflow-hidden rounded-[26px]">
           <Image
             src={chocoCakeImage}
             alt="Bolo de chocolate artesanal da PURO DOCE"

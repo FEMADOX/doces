@@ -23,7 +23,7 @@ export default function Footer() {
         padding: 'clamp(48px,7vw,90px) clamp(20px,5vw,72px) 0'
       }}
     >
-      <div className="mx-auto flex max-w-[1100px] flex-wrap items-start justify-between gap-6">
+      <div className="mx-auto flex max-w-275 flex-wrap items-start justify-between gap-6">
         <div>
           <div
             className="font-display text-[42px] leading-none"
@@ -32,7 +32,7 @@ export default function Footer() {
             DOCE
           </div>
           <p
-            className="mt-2.5 max-w-[300px] text-[15px]"
+            className="mt-2.5 max-w-75 text-[15px]"
             style={{ color: '#C3A985' }}
           >
             Brigadeiro na hora · brownie · bolo no pote · cheesecake. Desde 2015
@@ -47,7 +47,7 @@ export default function Footer() {
       </div>
 
       <div
-        className="mt-10 pt-[22px] pb-4 text-center text-sm"
+        className="mt-10 pt-5.5 pb-4 text-center text-sm"
         style={{
           borderTop: '2px solid rgba(255,255,255,.12)',
           color: '#A8906C'
