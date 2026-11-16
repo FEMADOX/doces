@@ -17,6 +17,7 @@ const baloo = Baloo_2({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://doces-flame.vercel.app/'),
   title: 'PURO DOCE — Brigadeiro gourmet & doces em Curitiba',
   description:
     'Brigadeiro gourmet enrolado na hora, bolos, brownies e cheesecakes fresquinhos. Doce de verdade, feito à mão, desde 2015 em Curitiba. Peça pelo WhatsApp.',
@@ -25,6 +26,9 @@ export const metadata: Metadata = {
     description:
       'Brigadeiro gourmet, bolo no pote, brownie e cheesecake. Entrega em toda Curitiba.',
     type: 'website'
+  },
+  icons: {
+    icon: { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' }
   }
 }
 
